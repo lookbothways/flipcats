@@ -1,4 +1,4 @@
 [
-  { "name": "U1: Numbers : Rhifau", "file": "cards_numbers_rhifau" },
+  { "name": "U1: Numbers : Rhifau", "file": "cards_numbers_rhifau.json" },
   { "name": "U4: Soft mutations", "file": "cards_soft.json" }
 ]
