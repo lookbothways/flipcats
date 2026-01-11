@@ -1,0 +1,15 @@
+{
+  "frontLabel": "Radical",
+  "backLabel": "Soft Mutation",
+  "cards": [
+    { "f": "P", "b": "B" },
+    { "f": "T", "b": "D" },
+    { "f": "C", "b": "G" },
+    { "f": "B", "b": "F" },
+    { "f": "D", "b": "Dd" },
+    { "f": "G", "b": "- nothing" },
+    { "f": "M", "b": "F" },
+    { "f": "Ll", "b": "L" },
+    { "f": "Rh", "b": "R" }
+  ]
+}

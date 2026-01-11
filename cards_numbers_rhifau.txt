@@ -1,0 +1,17 @@
+{
+  "frontLabel": "Rhif (Number)",
+  "backLabel": "Cymraeg (Welsh)",
+  "cards": [
+    { "f": "0", "b": "dim" },
+    { "f": "1", "b": "un" },
+    { "f": "2", "b": "dau" },
+    { "f": "3", "b": "tri" },
+    { "f": "4", "b": "pedwar" },
+    { "f": "5", "b": "pump" },
+    { "f": "6", "b": "chwech" },
+    { "f": "7", "b": "saith" },
+    { "f": "8", "b": "wyth" },
+    { "f": "9", "b": "naw" },
+    { "f": "10", "b": "deg" }
+  ]
+}

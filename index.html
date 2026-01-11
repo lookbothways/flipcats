@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcard Clone</title>
+    <style>
+        :root {
+            --bg-color: #f6f7fb; --card-bg: #ffffff; --text-main: #303545;
+            --accent-orange: #ffcd1f; --accent-green: #23b26d; --accent-blue: #4255ff;
+            --border-color: #edeff4; --shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-main); display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+        
+        header { padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; background: white; border-bottom: 2px solid var(--border-color); gap: 10px; }
+        select { padding: 8px; border-radius: 6px; border: 1px solid var(--border-color); flex-grow: 1; max-width: 200px; font-size: 0.9rem; }
+        
+        .stats-bar { display: flex; justify-content: center; gap: 30px; padding: 15px 0; font-weight: 700; font-size: 0.9rem; }
+        .still-learning { color: #d9822b; } .know { color: var(--accent-green); }
+        .count-badge { padding: 2px 12px; border-radius: 20px; border: 2px solid #eee; background: white; }
+
+        .card-container { flex-grow: 1; display: flex; align-items: center; justify-content: center; perspective: 1000px; padding: 20px; }
+        .card { width: 100%; max-width: 400px; height: 400px; position: relative; transform-style: preserve-3d; transition: transform 0.4s; cursor: pointer; }
+        .card.flipped { transform: rotateY(180deg); }
+        .card-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; background: white; border-radius: 24px; box-shadow: var(--shadow); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
+        .card-back { transform: rotateY(180deg); background-color: #fafaff; }
+        .card-content { font-size: 4rem; font-weight: 700; }
+        .label { position: absolute; top: 20px; left: 20px; font-size: 0.7rem; color: #939bb4; text-transform: uppercase; }
+
+        .action-buttons { display: flex; justify-content: center; gap: 20px; padding-bottom: 30px; }
+        .btn-circle { width: 60px; height: 60px; border-radius: 50%; border: 1px solid #eee; background: white; cursor: pointer; font-size: 1.5rem; transition: 0.1s; }
+        .btn-circle:active { transform: scale(0.9); }
+        .btn-x { color: #f05454; } .btn-check { color: var(--accent-green); }
+
+        footer { padding: 15px 20px; display: flex; justify-content: space-between; background: white; border-top: 1px solid var(--border-color); }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <select id="deck-selector" onchange="loadDeck(this.value)">
+            <option value="">Loading decks...</option>
+        </select>
+        <div id="progress-header">0 / 0</div>
+        <button style="background:none; border:none; font-size:1.2rem; cursor:pointer">✕</button>
+    </header>
+
+    <div id="game-view">
+        <div class="stats-bar">
+            <div class="stat-item still-learning"><span class="count-badge" id="sl-count">0</span> Still learning</div>
+            <div class="stat-item know">Know <span class="count-badge" id="k-count">0</span></div>
+        </div>
+
+        <div class="card-container">
+            <div class="card" id="flashcard" onclick="this.classList.toggle('flipped')">
+                <div class="card-face card-front">
+                    <span class="label" id="front-label">Front</span>
+                    <div class="card-content" id="front-text">--</div>
+                </div>
+                <div class="card-face card-back">
+                    <span class="label" id="back-label">Back</span>
+                    <div class="card-content" id="back-text">--</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn-circle btn-x" onclick="answer(false)">✕</button>
+            <button class="btn-circle btn-check" onclick="answer(true)">✓</button>
+        </div>
+
+        <footer>
+            <button onclick="initDeck()" style="background:none; border:none; cursor:pointer; font-size:1.2rem;">↺</button>
+            <span style="color:var(--accent-blue); font-weight:600; font-size:0.8rem;">Track progress</span>
+            <button onclick="shuffle()" style="background:none; border:none; cursor:pointer; font-size:1.2rem;">⇄</button>
+        </footer>
+    </div>
+
+    <script>
+        let currentDeck = [];
+        let currentIndex = 0;
+        let score = { learning: 0, know: 0 };
+
+        async function initApp() {
+            try {
+                const response = await fetch('manifest.json');
+                const decks = await response.json();
+                const selector = document.getElementById('deck-selector');
+                selector.innerHTML = '';
+                
+                decks.forEach(deck => {
+                    let opt = document.createElement('option');
+                    opt.value = deck.file;
+                    opt.innerHTML = deck.name;
+                    selector.appendChild(opt);
+                });
+
+                loadDeck(decks[0].file);
+            } catch (e) {
+                alert("Could not load manifest.json. Make sure you are running this on a server or GitHub Pages.");
+            }
+        }
+
+        async function loadDeck(filename) {
+            const response = await fetch(filename);
+            const data = await response.json();
+            currentDeck = data.cards;
+            document.getElementById('front-label').innerText = data.frontLabel || "Front";
+            document.getElementById('back-label').innerText = data.backLabel || "Back";
+            initDeck();
+        }
+
+        function initDeck() {
+            currentIndex = 0;
+            score = { learning: 0, know: 0 };
+            updateUI();
+        }
+
+        function shuffle() {
+            currentDeck.sort(() => Math.random() - 0.5);
+            initDeck();
+        }
+
+        function answer(known) {
+            if (known) score.know++; else score.learning++;
+            currentIndex++;
+            updateUI();
+        }
+
+        function updateUI() {
+            const card = document.getElementById('flashcard');
+            card.classList.remove('flipped');
+
+            if (currentIndex >= currentDeck.length) {
+                document.getElementById('front-text').innerText = "Done!";
+                document.getElementById('back-text').innerText = "Fin";
+                return;
+            }
+
+            setTimeout(() => {
+                document.getElementById('front-text').innerText = currentDeck[currentIndex].f;
+                document.getElementById('back-text').innerText = currentDeck[currentIndex].b;
+                document.getElementById('progress-header').innerText = `${currentIndex + 1} / ${currentDeck.length}`;
+                document.getElementById('sl-count').innerText = score.learning;
+                document.getElementById('k-count').innerText = score.know;
+            }, 100);
+        }
+
+        initApp();
+    </script>
+</body>
+</html>
