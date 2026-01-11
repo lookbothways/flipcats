@@ -1,0 +1,42 @@
+{
+  "frontLabel": "Original",
+  "backLabel": "Mutation",
+  "cards": [
+    {
+      "f": "Tom",
+      "b": "Daley"
+    },
+    {
+      "f": "Carey",
+      "b": "Grant"
+    },
+    {
+      "f": "Pierce",
+      "b": "Brosnan"
+    },
+    {
+      "f": "D (Thick van)",
+      "b": "Thyk"
+    },
+    {
+      "f": "Ghost",
+      "b": "-"
+    },
+    {
+      "f": "Back",
+      "b": "Front"
+    },
+    {
+      "f": "Rhiannon",
+      "b": "Ri"
+    },
+    {
+      "f": "Llewellyn ",
+      "b": "L"
+    },
+    {
+      "f": "Male",
+      "b": "Female"
+    }
+  ]
+}

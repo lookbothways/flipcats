@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Card Set Creator</title>
+    <style>
+        body { font-family: sans-serif; max-width: 600px; margin: 40px auto; padding: 20px; line-height: 1.6; background: #f4f4f9; }
+        .section { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 0.9rem; }
+        input { padding: 8px; border: 1px solid #ccc; border-radius: 4px; width: 100%; box-sizing: border-box; margin-bottom: 10px; }
+        
+        .card-row { display: flex; gap: 10px; margin-bottom: 10px; align-items: center; }
+        .card-row input { margin-bottom: 0; }
+        
+        button { cursor: pointer; padding: 10px 15px; border: none; border-radius: 4px; font-weight: bold; }
+        .btn-add { background: #4255ff; color: white; width: 100%; margin-top: 10px; }
+        .btn-save { background: #23b26d; color: white; width: 100%; font-size: 1.1rem; margin-top: 20px; }
+        .btn-del { background: #ff4d4d; color: white; padding: 8px 12px; }
+        
+        h2 { margin-top: 0; color: #303545; }
+        .hint { font-size: 0.8rem; color: #666; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+
+    <div class="section">
+        <h2>1. File Info</h2>
+        <label>Set Name (used for filename)</label>
+        <input type="text" id="setName" placeholder="e.g. nasal_mutations">
+        <p class="hint">This will save as: <b>cards_<span id="filename-preview">...</span>.json</b></p>
+
+        <div style="display: flex; gap: 20px;">
+            <div style="flex: 1;">
+                <label>Front Label</label>
+                <input type="text" id="frontLabel" value="Radical">
+            </div>
+            <div style="flex: 1;">
+                <label>Back Label</label>
+                <input type="text" id="backLabel" value="Mutation">
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>2. Cards</h2>
+        <div id="card-list">
+            <!-- Rows will be added here -->
+            <div class="card-row">
+                <input type="text" class="f-input" placeholder="Front (f)">
+                <input type="text" class="b-input" placeholder="Back (b)">
+                <button class="btn-del" onclick="this.parentElement.remove()">✕</button>
+            </div>
+        </div>
+        <button class="btn-add" onclick="addCardRow()">+ Add Card</button>
+    </div>
+
+    <button class="btn-save" onclick="downloadJson()">Save as JSON File</button>
+
+    <script>
+        // Update filename preview as user types
+        document.getElementById('setName').addEventListener('input', function(e) {
+            document.getElementById('filename-preview').innerText = e.target.value || '...';
+        });
+
+        function addCardRow() {
+            const container = document.getElementById('card-list');
+            const div = document.createElement('div');
+            div.className = 'card-row';
+            div.innerHTML = `
+                <input type="text" class="f-input" placeholder="Front (f)">
+                <input type="text" class="b-input" placeholder="Back (b)">
+                <button class="btn-del" onclick="this.parentElement.remove()">✕</button>
+            `;
+            container.appendChild(div);
+        }
+
+        function downloadJson() {
+            const setName = document.getElementById('setName').value || 'new_cards';
+            const fLabel = document.getElementById('frontLabel').value;
+            const bLabel = document.getElementById('backLabel').value;
+            
+            const fInputs = document.querySelectorAll('.f-input');
+            const bInputs = document.querySelectorAll('.b-input');
+            
+            const cards = [];
+            for (let i = 0; i < fInputs.length; i++) {
+                if (fInputs[i].value || bInputs[i].value) {
+                    cards.push({
+                        f: fInputs[i].value,
+                        b: bInputs[i].value
+                    });
+                }
+            }
+
+            const data = {
+                frontLabel: fLabel,
+                backLabel: bLabel,
+                cards: cards
+            };
+
+            // Create JSON string
+            const jsonString = JSON.stringify(data, null, 2);
+            const blob = new Blob([jsonString], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+            
+            // Create a temporary link to trigger download
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = `cards_${setName.replace(/\s+/g, '_').toLowerCase()}.json`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
