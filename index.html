@@ -15,7 +15,9 @@
         
         header { padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; background: white; border-bottom: 2px solid var(--border-color); gap: 10px; }
         select { padding: 8px; border-radius: 6px; border: 1px solid var(--border-color); flex-grow: 1; max-width: 200px; font-size: 0.9rem; }
-        
+        .creator-btn { text-decoration: none; color: #939bb4; font-size: 1.8rem; line-height: 1; padding: 0 5px; transition: color 0.2s; }
+        .creator-btn:hover { color: var(--accent-blue); }
+
         .stats-bar { display: flex; justify-content: center; gap: 30px; padding: 15px 0; font-weight: 700; font-size: 0.9rem; }
         .still-learning { color: #d9822b; } .know { color: var(--accent-green); }
         .count-badge { padding: 2px 12px; border-radius: 20px; border: 2px solid #eee; background: white; }
@@ -34,7 +36,6 @@
         .btn-x { color: #f05454; } .btn-check { color: var(--accent-green); }
 
         footer { padding: 15px 20px; display: flex; justify-content: space-between; background: white; border-top: 1px solid var(--border-color); }
-        .hidden { display: none !important; }
     </style>
 </head>
 <body>
@@ -44,7 +45,8 @@
             <option value="">Loading decks...</option>
         </select>
         <div id="progress-header">0 / 0</div>
-        <button style="background:none; border:none; font-size:1.2rem; cursor:pointer">✕</button>
+        <!-- Link to Creator Page -->
+        <a href="cardCreator.html" class="creator-btn" title="Create New Deck">+</a>
     </header>
 
     <div id="game-view">
@@ -99,7 +101,7 @@
 
                 loadDeck(decks[0].file);
             } catch (e) {
-                alert("Could not load manifest.json. Make sure you are running this on a server or GitHub Pages.");
+                alert("Could not load manifest.json. Check for syntax errors or trailing commas!");
             }
         }
 
@@ -135,7 +137,7 @@
 
             if (currentIndex >= currentDeck.length) {
                 document.getElementById('front-text').innerText = "Done!";
-                document.getElementById('back-text').innerText = "Fin";
+                document.getElementById('back-text').innerText = "Da iawn!";
                 return;
             }
 
