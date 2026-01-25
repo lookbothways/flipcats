@@ -4,75 +4,92 @@
     <meta charset="UTF-8">
     <title>Card Set Creator</title>
     <style>
-        body { font-family: sans-serif; max-width: 600px; margin: 40px auto; padding: 20px; line-height: 1.6; background: #f4f4f9; }
-        .header-nav { margin-bottom: 20px; }
-        .header-nav a { text-decoration: none; color: #4255ff; font-weight: bold; font-size: 0.9rem; }
+        body { font-family: sans-serif; max-width: 700px; margin: 40px auto; padding: 20px; line-height: 1.6; background: #f4f4f9; color: #303545; }
+        .header-nav { margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .header-nav a { text-decoration: none; color: #4255ff; font-weight: bold; }
         .section { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
         label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 0.9rem; }
-        input { padding: 8px; border: 1px solid #ccc; border-radius: 4px; width: 100%; box-sizing: border-box; margin-bottom: 10px; }
+        input { padding: 10px; border: 1px solid #ccc; border-radius: 4px; width: 100%; box-sizing: border-box; margin-bottom: 10px; font-size: 1rem; }
         .card-row { display: flex; gap: 10px; margin-bottom: 10px; align-items: center; }
         .card-row input { margin-bottom: 0; }
-        button { cursor: pointer; padding: 10px 15px; border: none; border-radius: 4px; font-weight: bold; }
+        button { cursor: pointer; padding: 10px 15px; border: none; border-radius: 4px; font-weight: bold; transition: opacity 0.2s; }
+        button:hover { opacity: 0.8; }
         .btn-add { background: #4255ff; color: white; width: 100%; margin-top: 10px; }
-        .btn-save { background: #23b26d; color: white; width: 100%; font-size: 1.1rem; margin-top: 20px; }
-        .btn-del { background: #ff4d4d; color: white; padding: 8px 12px; }
-        h2 { margin-top: 0; color: #303545; }
-        .hint { font-size: 0.8rem; color: #666; margin-bottom: 15px; }
+        .btn-save { background: #23b26d; color: white; width: 100%; font-size: 1.1rem; margin-top: 10px; }
+        .btn-del { background: #ff4d4d; color: white; padding: 10px 14px; }
+        h2 { margin-top: 0; font-size: 1.2rem; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px; }
+        .manifest-box { background: #2d2d2d; color: #abd6a7; padding: 15px; border-radius: 6px; font-family: monospace; font-size: 0.85rem; overflow-x: auto; white-space: pre; margin-top: 10px; border: 1px solid #000; }
+        .copy-hint { font-size: 0.8rem; color: #666; margin-top: 5px; }
     </style>
 </head>
 <body>
 
     <div class="header-nav">
         <a href="index.html">← Back to Flashcards</a>
+        <button onclick="window.location.reload()" style="background:#eee; color:#666; font-size: 0.7rem; padding: 5px 10px;">Clear Form</button>
     </div>
 
     <div class="section">
-        <h2>1. File Info</h2>
-        <label>Set Name (used for filename)</label>
-        <input type="text" id="setName" placeholder="e.g. nasal_mutations">
-        <p class="hint">This will save as: <b>cards_<span id="filename-preview">...</span>.json</b></p>
+        <h2>1. Set Information</h2>
+        <label>Display Name (how it appears in the dropdown)</label>
+        <input type="text" id="displayName" placeholder="e.g. U5: Weather" oninput="updateManifest()">
+        
+        <label>Filename ID (no spaces)</label>
+        <input type="text" id="setName" placeholder="e.g. weather" oninput="updateManifest()">
 
         <div style="display: flex; gap: 20px;">
             <div style="flex: 1;">
                 <label>Front Label</label>
-                <input type="text" id="frontLabel" value="Radical">
+                <input type="text" id="frontLabel" value="Welsh">
             </div>
             <div style="flex: 1;">
                 <label>Back Label</label>
-                <input type="text" id="backLabel" value="Mutation">
+                <input type="text" id="backLabel" value="English">
             </div>
         </div>
     </div>
 
     <div class="section">
-        <h2>2. Cards</h2>
+        <h2>2. Manifest Entry</h2>
+        <p style="font-size: 0.85rem; color: #555;">Copy this line into your <b>manifest.json</b> file. Don't forget the comma on the previous line!</p>
+        <div class="manifest-box" id="manifest-preview">{ "name": "...", "file": "..." }</div>
+    </div>
+
+    <div class="section">
+        <h2>3. Card Data</h2>
         <div id="card-list">
             <div class="card-row">
-                <input type="text" class="f-input" placeholder="Front (f)">
-                <input type="text" class="b-input" placeholder="Back (b)">
+                <input type="text" class="f-input" placeholder="Front">
+                <input type="text" class="b-input" placeholder="Back">
                 <button class="btn-del" onclick="this.parentElement.remove()">✕</button>
             </div>
         </div>
-        <button class="btn-add" onclick="addCardRow()">+ Add Card</button>
+        <button class="btn-add" onclick="addCardRow()">+ Add Row</button>
+        <button class="btn-save" onclick="downloadJson()">Download cards JSON File</button>
     </div>
 
-    <button class="btn-save" onclick="downloadJson()">Save as JSON File</button>
-
     <script>
-        document.getElementById('setName').addEventListener('input', function(e) {
-            document.getElementById('filename-preview').innerText = e.target.value || '...';
-        });
+        function updateManifest() {
+            const display = document.getElementById('displayName').value || "New Set";
+            const fileId = document.getElementById('setName').value.replace(/\s+/g, '_').toLowerCase() || "filename";
+            const preview = document.getElementById('manifest-preview');
+            preview.innerText = `{ "name": "${display}", "file": "cards_${fileId}.json" }`;
+        }
 
         function addCardRow() {
             const container = document.getElementById('card-list');
             const div = document.createElement('div');
             div.className = 'card-row';
-            div.innerHTML = `<input type="text" class="f-input" placeholder="Front (f)"><input type="text" class="b-input" placeholder="Back (b)"><button class="btn-del" onclick="this.parentElement.remove()">✕</button>`;
+            div.innerHTML = `
+                <input type="text" class="f-input" placeholder="Front">
+                <input type="text" class="b-input" placeholder="Back">
+                <button class="btn-del" onclick="this.parentElement.remove()">✕</button>
+            `;
             container.appendChild(div);
         }
 
         function downloadJson() {
-            const setName = document.getElementById('setName').value || 'new_cards';
+            const fileId = document.getElementById('setName').value.replace(/\s+/g, '_').toLowerCase() || 'new_cards';
             const data = {
                 frontLabel: document.getElementById('frontLabel').value,
                 backLabel: document.getElementById('backLabel').value,
@@ -81,12 +98,16 @@
                     b: row.querySelector('.b-input').value
                 })).filter(c => c.f || c.b)
             };
+            
             const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
             const link = document.createElement("a");
             link.href = URL.createObjectURL(blob);
-            link.download = `cards_${setName.replace(/\s+/g, '_').toLowerCase()}.json`;
+            link.download = `cards_${fileId}.json`;
             link.click();
         }
+        
+        // Initial run
+        updateManifest();
     </script>
 </body>
 </html>

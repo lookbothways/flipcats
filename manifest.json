@@ -1,5 +1,6 @@
 [
   { "name": "U1: Numbers : Rhifau", "file": "cards_numbers_rhifau.json" },
   { "name": "U4: Soft mutations", "file": "cards_soft.json" },
-  { "name": "U4: Soft mutation memorising", "file": "cards_memorising_soft_mutations.json" }  
+  { "name": "U4: Soft mutation memorising", "file": "cards_memorising_soft_mutations.json" },
+  { "name": "U5: Weather : Tywydd", "file": "cards_weather_tywydd.json" }
 ]

@@ -1,0 +1,27 @@
+{
+  "frontLabel": "Welsh",
+  "backLabel": "English",
+  "cards": [
+    { "f": "Mae hi'n oer", "b": "It's cold" },
+    { "f": "Mae hi'n braf", "b": "It's fine" },
+    { "f": "Mae hi'n heulog", "b": "It's sunny" },
+    { "f": "Mae hi'n dwym", "b": "It's warm" },
+    { "f": "Mae hi'n bwrw glaw", "b": "It's raining" },
+    { "f": "Mae hi'n niwlog", "b": "It's foggy" },
+    { "f": "Mae hi'n wyntog", "b": "It's windy" },
+    { "f": "Mae hi'n wlyb", "b": "It's wet" },
+    { "f": "Mae hi'n ddiflas", "b": "It's miserable" },
+    { "f": "Mae hi'n bwrw cesair", "b": "It's hailing" },
+    { "f": "Mae hi'n stormus", "b": "It's stormy" },
+    { "f": "Mae hi'n boeth", "b": "It's hot" },
+    { "f": "Mae hi'n bwrw eira", "b": "It's snowing" },
+    { "f": "Mae hi'n bwrw eirlaw", "b": "It's sleeting" },
+    { "f": "Mae hi'n gymylog", "b": "It's cloudy" },
+    { "f": "Mae hi'n hyfryd", "b": "It's lovely" },
+    { "f": "Mae hi'n rhewi", "b": "It's freezing" },
+    { "f": "Mae hi'n dywyll", "b": "It's dark" },
+    { "f": "Mae hi'n dadleth", "b": "It's thawing" },
+    { "f": "Mor dywyll â bola buwch", "b": "It's pitch black (as a cow's stomach)" },
+    { "f": "Mae hi'n bwrw hen wragedd a ffyn", "b": "It's raining old ladies and sticks" }
+  ]
+}
