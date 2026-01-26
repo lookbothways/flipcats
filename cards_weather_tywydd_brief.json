@@ -1,0 +1,27 @@
+{
+  "frontLabel": "Welsh",
+  "backLabel": "English",
+  "cards": [
+    { "f": "oer", "b": "cold" },
+    { "f": "braf", "b": "fine" },
+    { "f": "heulog", "b": "sunny" },
+    { "f": "dwym", "b": "warm" },
+    { "f": "bwrw glaw", "b": "raining" },
+    { "f": "niwlog", "b": "foggy" },
+    { "f": "wyntog", "b": "windy" },
+    { "f": "wlyb", "b": "wet" },
+    { "f": "ddiflas", "b": "miserable" },
+    { "f": "bwrw cesair", "b": "hailing" },
+    { "f": "stormus", "b": "stormy" },
+    { "f": "boeth", "b": "hot" },
+    { "f": "bwrw eira", "b": "snowing" },
+    { "f": "bwrw eirlaw", "b": "sleeting" },
+    { "f": "gymylog", "b": "cloudy" },
+    { "f": "hyfryd", "b": "lovely" },
+    { "f": "rhewi", "b": "freezing" },
+    { "f": "dywyll", "b": "dark" },
+    { "f": "dadleth", "b": "thawing" },
+    { "f": "Mor dywyll â bola buwch", "b": "pitch black (as a cow's stomach)" },
+    { "f": "bwrw hen wragedd a ffyn", "b": "raining old ladies and sticks" }
+  ]
+}
