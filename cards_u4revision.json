@@ -1,0 +1,42 @@
+{
+  "frontLabel": "Welsh",
+  "backLabel": "English",
+  "cards": [
+    {
+      "f": "ble",
+      "b": "where"
+    },
+    {
+      "f": "pam",
+      "b": "why"
+    },
+    {
+      "f": "pwy",
+      "b": "who"
+    },
+    {
+      "f": "beth",
+      "b": "what"
+    },
+    {
+      "f": "sut",
+      "b": "how"
+    },
+    {
+      "f": "dod",
+      "b": "coming"
+    },
+    {
+      "f": "mynd",
+      "b": "going"
+    },
+    {
+      "f": "i",
+      "b": "to"
+    },
+    {
+      "f": "o ",
+      "b": "from"
+    }
+  ]
+}
