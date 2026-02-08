@@ -4,39 +4,39 @@
   "cards": [
     {
       "f": "Tom",
-      "b": "Daley"
+      "b": "Daley: T to D"
     },
     {
       "f": "Carey",
-      "b": "Grant"
+      "b": "Grant: C to G"
     },
     {
       "f": "Pierce",
-      "b": "Brosnan"
+      "b": "Brosnan: P to B"
     },
     {
-      "f": "D (Thick van)",
-      "b": "Thyk"
+      "f": "D.. thick van",
+      "b": "Thyk: D to T"
     },
     {
-      "f": "Ghost",
-      "b": "-"
+      "f": "G-host",
+      "b": "- nothing!"
     },
     {
-      "f": "Back",
-      "b": "Front"
+      "f": "B-ack",
+      "b": "Front: B to F"
     },
     {
-      "f": "Rhiannon",
-      "b": "Ri"
+      "f": "Rhi-annon",
+      "b": "Ri: Rhi to Ri"
     },
     {
-      "f": "Llewellyn ",
-      "b": "L"
+      "f": "Ll-ewellyn ",
+      "b": "L@ Ll to L"
     },
     {
       "f": "Male",
-      "b": "Female"
+      "b": "Female: M to F"
     }
   ]
 }

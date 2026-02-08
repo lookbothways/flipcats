@@ -1,0 +1,114 @@
+{
+  "frontLabel": "Welsh",
+  "backLabel": "English",
+  "cards": [
+    {
+      "f": "Dw i'n dod o ",
+      "b": "I come from"
+    },
+    {
+      "f": "Mae Gareth yn dod o Gymru",
+      "b": "Gareth comes from Wales"
+    },
+    {
+      "f": "Cymru",
+      "b": "Wales"
+    },
+    {
+      "f": "Lwerddon",
+      "b": "Ireland"
+    },
+    {
+      "f": "Yr Alban",
+      "b": "Scotland"
+    },
+    {
+      "f": "Lloegr",
+      "b": "England"
+    },
+    {
+      "f": "gwyliau",
+      "b": "holiday"
+    },
+    {
+      "f": "Llundain",
+      "b": "London"
+    },
+    {
+      "f": "menyw",
+      "b": "woman"
+    },
+    {
+      "f": "menywod",
+      "b": "women"
+    },
+    {
+      "f": "dyn",
+      "b": "man"
+    },
+    {
+      "f": "dynion",
+      "b": "men"
+    },
+    {
+      "f": "gwely",
+      "b": "bed"
+    },
+    {
+      "f": "Nadolig",
+      "b": "Christmas"
+    },
+    {
+      "f": "penwythnos",
+      "b": "weekend"
+    },
+    {
+      "f": "aros",
+      "b": "stay/wait"
+    },
+    {
+      "f": "cerdded",
+      "b": "walk"
+    },
+    {
+      "f": "cofio",
+      "b": "remember"
+    },
+    {
+      "f": "dod",
+      "b": "come"
+    },
+    {
+      "f": "dweud",
+      "b": "to say/tell"
+    },
+    {
+      "f": "nabod",
+      "b": "to know/recognise"
+    },
+    {
+      "f": "bach",
+      "b": "small"
+    },
+    {
+      "f": "ty bach",
+      "b": "toilet"
+    },
+    {
+      "f": "pan",
+      "b": "when"
+    },
+    {
+      "f": "pop",
+      "b": "every"
+    },
+    {
+      "f": "weithiau",
+      "b": "sometimes"
+    },
+    {
+      "f": "yno",
+      "b": "there"
+    }
+  ]
+}
