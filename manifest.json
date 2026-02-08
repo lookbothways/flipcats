@@ -2,6 +2,7 @@
   { "name": "U1: Numbers - Rhifau", "file": "cards_numbers_rhifau.json" },
   { "name": "U3: Lliwiau - Colours", "file": "cards_colours.json" },
   { "name": "U4: Soft mutations", "file": "cards_soft.json" },
+  { "name": "U4: dydd - days", "file": "cards_u4days.json" },
   { "name": "U4: Soft mutation memorising", "file": "cards_memorising_soft_mutations.json" },
   { "name": "U4: Misc revision", "file": "cards_u3revision.json" },
   { "name": "U5: Weather - Tywydd", "file": "cards_weather_tywydd.json" },

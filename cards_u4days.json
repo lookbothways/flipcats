@@ -1,0 +1,34 @@
+{
+  "frontLabel": "Welsh",
+  "backLabel": "English",
+  "cards": [
+    {
+      "f": "dydd Sul",
+      "b": "Sunday"
+    },
+    {
+      "f": "dydd Llun",
+      "b": "Monday"
+    },
+    {
+      "f": "dydd Mawrth",
+      "b": "Tuesday"
+    },
+    {
+      "f": "dydd Mercher",
+      "b": "Wednesday"
+    },
+    {
+      "f": "dydd Iau",
+      "b": "Thursday"
+    },
+    {
+      "f": "dydd Gwener",
+      "b": "Friday"
+    },
+    {
+      "f": "dydd Sadwrn",
+      "b": "Saturday"
+    }
+  ]
+}

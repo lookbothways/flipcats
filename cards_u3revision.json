@@ -107,6 +107,62 @@
       "b": "sometimes"
     },
     {
+      "f": "gwaith",
+      "b": "work"
+    },
+    {
+      "f": "dosbarth",
+      "b": "class"
+    },
+    {
+      "f": "gwely",
+      "b": "bed"
+    },
+    {
+      "f": "'Dyn nin'n mynd i'r gwaith",
+      "b": "We're going to work"
+    },
+    {
+      "f": "Dw i'n mynd i'r sinema",
+      "b": "I'm going to the cinema"
+    },
+    {
+      "f": "Dw i'n mynd i Bangor",
+      "b": "I'm going to Bangor"
+    },
+    {
+      "f": "Ble rwyt ti'n mynd yfory?",
+      "b": "Where are you going tomorrow?"
+    },
+    {
+      "f": "yfory",
+      "b": "tomorrow"
+    },
+    {
+      "f": "nos yfory",
+      "b": "tomorrow night"
+    },
+    {
+      "f": "yr wythnos nesa",
+      "b": "next week"
+    },
+    {
+      "f": "nos Sul",
+      "b": "Sunday night"
+    },
+    {
+      "f": "heno",
+      "b": "tonight"
+    },
+    {
+      "f": "ado",
+      "b": "yes"
+    },
+    {
+      "f": "nac ado",
+      "b": "no"
+    },
+    {
       "f": "yno",
       "b": "there"
     }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flashcard Clone</title>
+    <title>Welsh Flashcard Blitz</title>
     <style>
         :root {
             --bg-color: #f6f7fb; --card-bg: #ffffff; --text-main: #303545;
@@ -13,38 +13,42 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
         body { background-color: var(--bg-color); color: var(--text-main); display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
         
-        header { padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; background: white; border-bottom: 2px solid var(--border-color); gap: 10px; }
-        select { padding: 8px; border-radius: 6px; border: 1px solid var(--border-color); flex-grow: 1; max-width: 200px; font-size: 0.9rem; }
-        .creator-btn { text-decoration: none; color: #939bb4; font-size: 1.8rem; line-height: 1; padding: 0 5px; transition: color 0.2s; }
-        .creator-btn:hover { color: var(--accent-blue); }
+        header { padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; background: white; border-bottom: 2px solid var(--border-color); gap: 8px; }
+        select { padding: 8px; border-radius: 6px; border: 1px solid var(--border-color); flex-grow: 1; max-width: 160px; font-size: 0.85rem; background: white; }
+        
+        .btn-blitz { background: #4255ff; color: white; border: none; padding: 8px 12px; border-radius: 6px; font-weight: bold; font-size: 0.85rem; cursor: pointer; white-space: nowrap; }
+        .btn-blitz:active { transform: scale(0.95); }
+        .creator-btn { text-decoration: none; color: #939bb4; font-size: 1.6rem; font-weight: bold; line-height: 1; padding: 0 5px; }
 
-        .stats-bar { display: flex; justify-content: center; gap: 30px; padding: 15px 0; font-weight: 700; font-size: 0.9rem; }
+        .stats-bar { display: flex; justify-content: center; gap: 30px; padding: 12px 0; font-weight: 700; font-size: 0.85rem; }
         .still-learning { color: #d9822b; } .know { color: var(--accent-green); }
         .count-badge { padding: 2px 12px; border-radius: 20px; border: 2px solid #eee; background: white; }
 
         .card-container { flex-grow: 1; display: flex; align-items: center; justify-content: center; perspective: 1000px; padding: 20px; }
         .card { width: 100%; max-width: 400px; height: 400px; position: relative; transform-style: preserve-3d; transition: transform 0.4s; cursor: pointer; }
         .card.flipped { transform: rotateY(180deg); }
-        .card-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; background: white; border-radius: 24px; box-shadow: var(--shadow); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
+        .card-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; background: white; border-radius: 24px; box-shadow: var(--shadow); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 25px; }
         .card-back { transform: rotateY(180deg); background-color: #fafaff; }
-        .card-content { font-size: 3.5rem; font-weight: 700; word-break: break-word; }
-        .label { position: absolute; top: 20px; left: 20px; font-size: 0.7rem; color: #939bb4; text-transform: uppercase; }
+        .card-content { font-size: 2.8rem; font-weight: 700; word-break: break-word; line-height: 1.2; }
+        .label { position: absolute; top: 20px; left: 20px; font-size: 0.7rem; color: #939bb4; text-transform: uppercase; letter-spacing: 0.5px; }
 
         .action-buttons { display: flex; justify-content: center; gap: 20px; padding-bottom: 30px; }
-        .btn-circle { width: 60px; height: 60px; border-radius: 50%; border: 1px solid #eee; background: white; cursor: pointer; font-size: 1.5rem; transition: 0.1s; }
+        .btn-circle { width: 65px; height: 65px; border-radius: 50%; border: 1px solid #eee; background: white; cursor: pointer; font-size: 1.6rem; transition: 0.1s; box-shadow: var(--shadow); }
         .btn-circle:active { transform: scale(0.9); }
         .btn-x { color: #f05454; } .btn-check { color: var(--accent-green); }
 
-        footer { padding: 15px 20px; display: flex; justify-content: space-between; background: white; border-top: 1px solid var(--border-color); }
+        footer { padding: 15px 20px; display: flex; justify-content: space-between; background: white; border-top: 1px solid var(--border-color); align-items: center; }
+        .mode-text { font-size: 0.75rem; font-weight: bold; color: var(--accent-blue); text-transform: uppercase; }
     </style>
 </head>
 <body>
 
     <header>
         <select id="deck-selector" onchange="loadDeck(this.value)">
-            <option value="">Loading decks...</option>
+            <option value="">Loading...</option>
         </select>
-        <div id="progress-header">0 / 0</div>
+        <button class="btn-blitz" onclick="blitzAll()" id="blitz-btn">Blitz All ⚡</button>
+        <div id="progress-header" style="font-weight: bold; font-size: 0.9rem;">0/0</div>
         <a href="cardCreator.html" class="creator-btn" title="Create New Deck">+</a>
     </header>
 
@@ -68,40 +72,65 @@
         </div>
 
         <div class="action-buttons">
-            <button class="btn-circle btn-x" onclick="answer(false)" title="Still Learning">✕</button>
-            <button class="btn-circle btn-check" onclick="answer(true)" title="Know It">✓</button>
+            <button class="btn-circle btn-x" onclick="answer(false)">✕</button>
+            <button class="btn-circle btn-check" onclick="answer(true)">✓</button>
         </div>
 
         <footer>
-            <button onclick="initDeck()" title="Restart Deck" style="background:none; border:none; cursor:pointer; font-size:1.2rem;">↺</button>
-            <span style="color:var(--accent-blue); font-weight:600; font-size:0.8rem;">Mastery Mode</span>
-            <button onclick="shuffleActive()" title="Shuffle Remaining" style="background:none; border:none; cursor:pointer; font-size:1.2rem;">⇄</button>
+            <button onclick="initDeck()" title="Restart" style="background:none; border:none; cursor:pointer; font-size:1.2rem;">↺</button>
+            <div class="mode-text" id="mode-display">Mastery Mode</div>
+            <button onclick="shuffleActive()" title="Shuffle" style="background:none; border:none; cursor:pointer; font-size:1.2rem;">⇄</button>
         </footer>
     </div>
 
     <script>
-        let fullDeck = [];      // Original data
-        let activeCards = [];   // Cards still being learned
-        let currentIndex = 0;   // Current position in activeCards
-        let scoreKnow = 0;      // How many have been mastered
+        let manifestData = [];
+        let fullDeck = [];      
+        let activeCards = [];   
+        let currentIndex = 0;   
+        let scoreKnow = 0;      
 
         async function initApp() {
             try {
                 const response = await fetch('manifest.json');
-                const decks = await response.json();
+                manifestData = await response.json();
                 const selector = document.getElementById('deck-selector');
                 selector.innerHTML = '';
                 
-                decks.forEach(deck => {
+                manifestData.forEach(deck => {
                     let opt = document.createElement('option');
                     opt.value = deck.file;
                     opt.innerHTML = deck.name;
                     selector.appendChild(opt);
                 });
 
-                loadDeck(decks[0].file);
+                loadDeck(manifestData[0].file);
             } catch (e) {
-                alert("Error loading manifest.json. Ensure it's on a web server or GitHub Pages.");
+                alert("Error: Check manifest.json and ensures files are pushed to GitHub!");
+            }
+        }
+
+        async function blitzAll() {
+            const blitzBtn = document.getElementById('blitz-btn');
+            blitzBtn.innerText = "Loading...";
+            
+            try {
+                // Fetch all files mentioned in manifest simultaneously
+                const fetchPromises = manifestData.map(d => fetch(d.file).then(res => res.json()));
+                const allDecks = await Promise.all(fetchPromises);
+                
+                // Combine all cards into one array
+                fullDeck = allDecks.flatMap(deck => deck.cards);
+                
+                document.getElementById('mode-display').innerText = "⚡ BLITZ MODE ⚡";
+                document.getElementById('front-label').innerText = "Question";
+                document.getElementById('back-label').innerText = "Answer";
+                
+                blitzBtn.innerText = "Blitz All ⚡";
+                initDeck();
+            } catch (e) {
+                alert("Error loading one or more decks for Blitz session.");
+                blitzBtn.innerText = "Blitz All ⚡";
             }
         }
 
@@ -110,8 +139,9 @@
                 const response = await fetch(filename);
                 const data = await response.json();
                 fullDeck = data.cards;
-                document.getElementById('front-label').innerText = data.frontLabel || "Front";
-                document.getElementById('back-label').innerText = data.backLabel || "Back";
+                document.getElementById('front-label').innerText = data.frontLabel || "Welsh";
+                document.getElementById('back-label').innerText = data.backLabel || "English";
+                document.getElementById('mode-display').innerText = "Single Deck Mode";
                 initDeck();
             } catch (e) {
                 alert("Error loading card file: " + filename);
@@ -119,12 +149,10 @@
         }
 
         function initDeck() {
-            // Clone the full deck into active cards and start fresh
             activeCards = [...fullDeck];
             scoreKnow = 0;
             currentIndex = 0;
             shuffleActive();
-            updateUI();
         }
 
         function shuffleActive() {
@@ -137,20 +165,14 @@
             if (activeCards.length === 0) return;
 
             if (known) {
-                // Remove the mastered card from play
                 activeCards.splice(currentIndex, 1);
                 scoreKnow++;
-                // No need to increment currentIndex because the next card 
-                // shifted into the current index position.
             } else {
-                // Keep it in the list, just move to the next card
                 currentIndex++;
             }
 
-            // If we've reached the end of the current pile, wrap back to the start
             if (currentIndex >= activeCards.length) {
                 currentIndex = 0;
-                // Optional: Shuffle the remaining "not known" cards for the next round
                 activeCards.sort(() => Math.random() - 0.5);
             }
 
@@ -161,26 +183,29 @@
             const card = document.getElementById('flashcard');
             card.classList.remove('flipped');
 
-            // Header shows Mastery progress: [Mastered] / [Total]
             document.getElementById('progress-header').innerText = `${scoreKnow} / ${fullDeck.length}`;
-            
-            // Stats bar
             document.getElementById('sl-count').innerText = activeCards.length;
             document.getElementById('k-count').innerText = scoreKnow;
 
             if (activeCards.length === 0) {
                 setTimeout(() => {
                     document.getElementById('front-text').innerText = "Done!";
-                    document.getElementById('back-text').innerText = "Da iawn! (Well done)";
+                    document.getElementById('back-text').innerText = "Blitz Finished!";
                 }, 100);
                 return;
             }
 
-            // Update card content
             setTimeout(() => {
                 const current = activeCards[currentIndex];
                 document.getElementById('front-text').innerText = current.f;
                 document.getElementById('back-text').innerText = current.b;
+                
+                // Adjust font size for longer Blitz phrases
+                if (current.f.length > 20) {
+                    document.getElementById('front-text').style.fontSize = "1.8rem";
+                } else {
+                    document.getElementById('front-text').style.fontSize = "2.8rem";
+                }
             }, 100);
         }
 
