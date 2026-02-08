@@ -1,0 +1,50 @@
+{
+  "frontLabel": "Welsh",
+  "backLabel": "English",
+  "cards": [
+    {
+      "f": "pinc",
+      "b": "pink"
+    },
+    {
+      "f": "brown",
+      "b": "brown"
+    },
+    {
+      "f": "coch",
+      "b": "red"
+    },
+    {
+      "f": "gwyn",
+      "b": "white"
+    },
+    {
+      "f": "du",
+      "b": "black"
+    },
+    {
+      "f": "glas",
+      "b": "blue"
+    },
+    {
+      "f": "melyn",
+      "b": "yellow"
+    },
+    {
+      "f": "gwyrdd",
+      "b": "green"
+    },
+    {
+      "f": "oren",
+      "b": "orange"
+    },
+    {
+      "f": "porffor",
+      "b": "purple"
+    },
+    {
+      "f": "llwyd",
+      "b": "grey"
+    }
+  ]
+}

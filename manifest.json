@@ -3,5 +3,6 @@
   { "name": "U4: Soft mutations", "file": "cards_soft.json" },
   { "name": "U4: Soft mutation memorising", "file": "cards_memorising_soft_mutations.json" },
   { "name": "U5: Weather : Tywydd", "file": "cards_weather_tywydd.json" },
-  { "name": "U5: Weather : abbreviated", "file": "cards_weather_tywydd_brief.json" }
+  { "name": "U5: Weather : abbreviated", "file": "cards_weather_tywydd_brief.json" },
+  { "name": "U3: Lliwiau - Colours", "file": "cards_colours.json" }
 ]
