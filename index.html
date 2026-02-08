@@ -27,7 +27,7 @@
         .card.flipped { transform: rotateY(180deg); }
         .card-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; background: white; border-radius: 24px; box-shadow: var(--shadow); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
         .card-back { transform: rotateY(180deg); background-color: #fafaff; }
-        .card-content { font-size: 4rem; font-weight: 700; }
+        .card-content { font-size: 3.5rem; font-weight: 700; word-break: break-word; }
         .label { position: absolute; top: 20px; left: 20px; font-size: 0.7rem; color: #939bb4; text-transform: uppercase; }
 
         .action-buttons { display: flex; justify-content: center; gap: 20px; padding-bottom: 30px; }
@@ -45,14 +45,13 @@
             <option value="">Loading decks...</option>
         </select>
         <div id="progress-header">0 / 0</div>
-        <!-- Link to Creator Page -->
         <a href="cardCreator.html" class="creator-btn" title="Create New Deck">+</a>
     </header>
 
     <div id="game-view">
         <div class="stats-bar">
-            <div class="stat-item still-learning"><span class="count-badge" id="sl-count">0</span> Still learning</div>
-            <div class="stat-item know">Know <span class="count-badge" id="k-count">0</span></div>
+            <div class="stat-item still-learning"><span class="count-badge" id="sl-count">0</span> Remaining</div>
+            <div class="stat-item know">Mastered <span class="count-badge" id="k-count">0</span></div>
         </div>
 
         <div class="card-container">
@@ -69,21 +68,22 @@
         </div>
 
         <div class="action-buttons">
-            <button class="btn-circle btn-x" onclick="answer(false)">✕</button>
-            <button class="btn-circle btn-check" onclick="answer(true)">✓</button>
+            <button class="btn-circle btn-x" onclick="answer(false)" title="Still Learning">✕</button>
+            <button class="btn-circle btn-check" onclick="answer(true)" title="Know It">✓</button>
         </div>
 
         <footer>
-            <button onclick="initDeck()" style="background:none; border:none; cursor:pointer; font-size:1.2rem;">↺</button>
-            <span style="color:var(--accent-blue); font-weight:600; font-size:0.8rem;">Track progress</span>
-            <button onclick="shuffle()" style="background:none; border:none; cursor:pointer; font-size:1.2rem;">⇄</button>
+            <button onclick="initDeck()" title="Restart Deck" style="background:none; border:none; cursor:pointer; font-size:1.2rem;">↺</button>
+            <span style="color:var(--accent-blue); font-weight:600; font-size:0.8rem;">Mastery Mode</span>
+            <button onclick="shuffleActive()" title="Shuffle Remaining" style="background:none; border:none; cursor:pointer; font-size:1.2rem;">⇄</button>
         </footer>
     </div>
 
     <script>
-        let currentDeck = [];
-        let currentIndex = 0;
-        let score = { learning: 0, know: 0 };
+        let fullDeck = [];      // Original data
+        let activeCards = [];   // Cards still being learned
+        let currentIndex = 0;   // Current position in activeCards
+        let scoreKnow = 0;      // How many have been mastered
 
         async function initApp() {
             try {
@@ -101,33 +101,59 @@
 
                 loadDeck(decks[0].file);
             } catch (e) {
-                alert("Could not load manifest.json. Check for syntax errors or trailing commas!");
+                alert("Error loading manifest.json. Ensure it's on a web server or GitHub Pages.");
             }
         }
 
         async function loadDeck(filename) {
-            const response = await fetch(filename);
-            const data = await response.json();
-            currentDeck = data.cards;
-            document.getElementById('front-label').innerText = data.frontLabel || "Front";
-            document.getElementById('back-label').innerText = data.backLabel || "Back";
-            initDeck();
+            try {
+                const response = await fetch(filename);
+                const data = await response.json();
+                fullDeck = data.cards;
+                document.getElementById('front-label').innerText = data.frontLabel || "Front";
+                document.getElementById('back-label').innerText = data.backLabel || "Back";
+                initDeck();
+            } catch (e) {
+                alert("Error loading card file: " + filename);
+            }
         }
 
         function initDeck() {
+            // Clone the full deck into active cards and start fresh
+            activeCards = [...fullDeck];
+            scoreKnow = 0;
             currentIndex = 0;
-            score = { learning: 0, know: 0 };
+            shuffleActive();
             updateUI();
         }
 
-        function shuffle() {
-            currentDeck.sort(() => Math.random() - 0.5);
-            initDeck();
+        function shuffleActive() {
+            activeCards.sort(() => Math.random() - 0.5);
+            currentIndex = 0;
+            updateUI();
         }
 
         function answer(known) {
-            if (known) score.know++; else score.learning++;
-            currentIndex++;
+            if (activeCards.length === 0) return;
+
+            if (known) {
+                // Remove the mastered card from play
+                activeCards.splice(currentIndex, 1);
+                scoreKnow++;
+                // No need to increment currentIndex because the next card 
+                // shifted into the current index position.
+            } else {
+                // Keep it in the list, just move to the next card
+                currentIndex++;
+            }
+
+            // If we've reached the end of the current pile, wrap back to the start
+            if (currentIndex >= activeCards.length) {
+                currentIndex = 0;
+                // Optional: Shuffle the remaining "not known" cards for the next round
+                activeCards.sort(() => Math.random() - 0.5);
+            }
+
             updateUI();
         }
 
@@ -135,18 +161,26 @@
             const card = document.getElementById('flashcard');
             card.classList.remove('flipped');
 
-            if (currentIndex >= currentDeck.length) {
-                document.getElementById('front-text').innerText = "Done!";
-                document.getElementById('back-text').innerText = "Da iawn!";
+            // Header shows Mastery progress: [Mastered] / [Total]
+            document.getElementById('progress-header').innerText = `${scoreKnow} / ${fullDeck.length}`;
+            
+            // Stats bar
+            document.getElementById('sl-count').innerText = activeCards.length;
+            document.getElementById('k-count').innerText = scoreKnow;
+
+            if (activeCards.length === 0) {
+                setTimeout(() => {
+                    document.getElementById('front-text').innerText = "Done!";
+                    document.getElementById('back-text').innerText = "Da iawn! (Well done)";
+                }, 100);
                 return;
             }
 
+            // Update card content
             setTimeout(() => {
-                document.getElementById('front-text').innerText = currentDeck[currentIndex].f;
-                document.getElementById('back-text').innerText = currentDeck[currentIndex].b;
-                document.getElementById('progress-header').innerText = `${currentIndex + 1} / ${currentDeck.length}`;
-                document.getElementById('sl-count').innerText = score.learning;
-                document.getElementById('k-count').innerText = score.know;
+                const current = activeCards[currentIndex];
+                document.getElementById('front-text').innerText = current.f;
+                document.getElementById('back-text').innerText = current.b;
             }, 100);
         }
 
