@@ -7,5 +7,6 @@
   { "name": "U4: Soft mutation memorising", "file": "cards_memorising_soft_mutations.json" },
   { "name": "U4: Misc revision", "file": "cards_u4revision.json" },
   { "name": "U5: Weather - Tywydd", "file": "cards_weather_tywydd.json" },
-  { "name": "U5: Weather - abbreviated", "file": "cards_weather_tywydd_brief.json" }
+  { "name": "U5: Weather - abbreviated", "file": "cards_weather_tywydd_brief.json" },
+  { "name": "100 most common words", "file": "cards_100_most_common_words.json" }
 ]
