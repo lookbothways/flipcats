@@ -1,9 +1,9 @@
 {
-  "frontLabel": "Welsh",
+  "frontLabel": "Welsh (South)",
   "backLabel": "English",
   "cards": [
     {
-      "f": "y / yr",
+      "f": "y / yr / 'r",
       "b": "the"
     },
     {
@@ -16,31 +16,31 @@
     },
     {
       "f": "o",
-      "b": "of"
+      "b": "of / from"
     },
     {
       "f": "a / ac",
       "b": "and"
     },
     {
-      "f": "un",
-      "b": "a"
+      "f": "(dim gair)",
+      "b": "a / an (does not exist)"
     },
     {
-      "f": "yn",
+      "f": "yn / mewn",
       "b": "in"
     },
     {
       "f": "hwnnw / hynny",
-      "b": "that"
+      "b": "that (demonstrative)"
     },
     {
-      "f": "cael",
-      "b": "have"
+      "f": "mae ... gyda",
+      "b": "have (possession)"
     },
     {
       "f": "fi",
-      "b": "I"
+      "b": "I / me"
     },
     {
       "f": "e / hi",
@@ -48,7 +48,7 @@
     },
     {
       "f": "am",
-      "b": "for"
+      "b": "for / about"
     },
     {
       "f": "dim",
@@ -68,19 +68,19 @@
     },
     {
       "f": "fel",
-      "b": "as"
+      "b": "as / like (comparison)"
     },
     {
-      "f": "ti / chi",
+      "f": "ti (informal) / chi (formal)",
       "b": "you"
     },
     {
       "f": "gwneud",
-      "b": "do"
+      "b": "do / make"
     },
     {
       "f": "at",
-      "b": "at"
+      "b": "at (towards)"
     },
     {
       "f": "hwn / hyn",
@@ -92,31 +92,23 @@
     },
     {
       "f": "ei",
-      "b": "his"
+      "b": "his / her"
     },
     {
       "f": "gan",
       "b": "by"
     },
     {
-      "f": "o",
-      "b": "from"
-    },
-    {
       "f": "nhw",
-      "b": "they"
+      "b": "they / them"
     },
     {
       "f": "ni",
-      "b": "we"
+      "b": "we / us"
     },
     {
       "f": "dweud",
       "b": "say"
-    },
-    {
-      "f": "ei",
-      "b": "her"
     },
     {
       "f": "hi",
@@ -127,15 +119,11 @@
       "b": "or"
     },
     {
-      "f": "un",
-      "b": "an"
-    },
-    {
       "f": "bydd",
       "b": "will"
     },
     {
-      "f": "fy",
+      "f": "fy / 'y",
       "b": "my"
     },
     {
@@ -143,7 +131,7 @@
       "b": "one"
     },
     {
-      "f": "oll / pob",
+      "f": "i gyd / holl",
       "b": "all"
     },
     {
@@ -151,7 +139,7 @@
       "b": "would"
     },
     {
-      "f": "yna",
+      "f": "yna / yno",
       "b": "there"
     },
     {
@@ -167,7 +155,7 @@
       "b": "so"
     },
     {
-      "f": "i fyny",
+      "f": "i fyny / i lan",
       "b": "up"
     },
     {
@@ -179,16 +167,12 @@
       "b": "if"
     },
     {
-      "f": "am",
-      "b": "about"
-    },
-    {
       "f": "pwy",
       "b": "who"
     },
     {
       "f": "cael",
-      "b": "get"
+      "b": "get / have (receive)"
     },
     {
       "f": "pa",
@@ -199,43 +183,35 @@
       "b": "go"
     },
     {
-      "f": "fi",
-      "b": "me"
-    },
-    {
-      "f": "pryd / pan",
+      "f": "pryd (question) / pan (statement)",
       "b": "when"
-    },
-    {
-      "f": "gwneud",
-      "b": "make"
     },
     {
       "f": "gallu",
       "b": "can"
     },
     {
-      "f": "hoffi / fel",
-      "b": "like"
+      "f": "hoffi",
+      "b": "like (verb)"
     },
     {
       "f": "amser",
       "b": "time"
     },
     {
-      "f": "na",
+      "f": "na / nage",
       "b": "no"
     },
     {
-      "f": "newydd / yn unig",
-      "b": "just"
+      "f": "dim ond",
+      "b": "just / only"
     },
     {
       "f": "fe",
       "b": "him"
     },
     {
-      "f": "gwybod",
+      "f": "gwybod (facts) / nabod (people)",
       "b": "know"
     },
     {
@@ -271,10 +247,6 @@
       "b": "could"
     },
     {
-      "f": "nhw",
-      "b": "them"
-    },
-    {
       "f": "gweld",
       "b": "see"
     },
@@ -299,10 +271,6 @@
       "b": "look"
     },
     {
-      "f": "dim ond",
-      "b": "only"
-    },
-    {
       "f": "dod",
       "b": "come"
     },
@@ -323,7 +291,7 @@
       "b": "also"
     },
     {
-      "f": "cefn / yn ôl",
+      "f": "cefn (body) / yn ôl (direction)",
       "b": "back"
     },
     {
@@ -335,7 +303,7 @@
       "b": "use"
     },
     {
-      "f": "dau / dwy",
+      "f": "dau (masc) / dwy (fem)",
       "b": "two"
     },
     {
@@ -347,7 +315,7 @@
       "b": "our"
     },
     {
-      "f": "gwaith",
+      "f": "gwaith (noun) / gweithio (verb)",
       "b": "work"
     },
     {
@@ -355,7 +323,7 @@
       "b": "first"
     },
     {
-      "f": "wel / yn dda",
+      "f": "wel (interjection) / yn dda (adverb)",
       "b": "well"
     },
     {
@@ -371,7 +339,7 @@
       "b": "new"
     },
     {
-      "f": "eisiau",
+      "f": "moyn / eisiau",
       "b": "want"
     },
     {
@@ -391,16 +359,12 @@
       "b": "give"
     },
     {
-      "f": "dydd",
+      "f": "dydd / diwrnod",
       "b": "day"
     },
     {
-      "f": "rhan fwyaf",
+      "f": "y rhan fwyaf",
       "b": "most"
-    },
-    {
-      "f": "ni",
-      "b": "us"
     }
   ]
 }
