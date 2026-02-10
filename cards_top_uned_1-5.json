@@ -1,0 +1,182 @@
+{
+  "frontLabel": "Welsh",
+  "backLabel": "English",
+  "cards": [
+    {
+      "f": "y / yr",
+      "b": "the"
+    },
+    {
+      "f": "bod",
+      "b": "be"
+    },
+    {
+      "f": "i",
+      "b": "to"
+    },
+    {
+      "f": "o",
+      "b": "of"
+    },
+    {
+      "f": "a / ac",
+      "b": "and"
+    },
+    {
+      "f": "un",
+      "b": "a"
+    },
+    {
+      "f": "yn",
+      "b": "in"
+    },
+    {
+      "f": "fi",
+      "b": "I"
+    },
+    {
+      "f": "e / hi / o",
+      "b": "it"
+    },
+    {
+      "f": "dim",
+      "b": "not"
+    },
+    {
+      "f": "gyda / efo",
+      "b": "with"
+    },
+    {
+      "f": "fe / fo",
+      "b": "he"
+    },
+    {
+      "f": "ti / chi",
+      "b": "you"
+    },
+    {
+      "f": "gwneud",
+      "b": "do"
+    },
+    {
+      "f": "ond",
+      "b": "but"
+    },
+    {
+      "f": "o",
+      "b": "from"
+    },
+    {
+      "f": "nhw",
+      "b": "they"
+    },
+    {
+      "f": "ni",
+      "b": "we"
+    },
+    {
+      "f": "hi",
+      "b": "she"
+    },
+    {
+      "f": "neu",
+      "b": "or"
+    },
+    {
+      "f": "fy",
+      "b": "my"
+    },
+    {
+      "f": "un",
+      "b": "one"
+    },
+    {
+      "f": "beth",
+      "b": "what"
+    },
+    {
+      "f": "pwy",
+      "b": "who"
+    },
+    {
+      "f": "mynd",
+      "b": "go"
+    },
+    {
+      "f": "fi",
+      "b": "me"
+    },
+    {
+      "f": "gwneud",
+      "b": "make"
+    },
+    {
+      "f": "hoffi / lico",
+      "b": "like"
+    },
+    {
+      "f": "amser",
+      "b": "time"
+    },
+    {
+      "f": "na / nac ydw",
+      "b": "no"
+    },
+    {
+      "f": "gwybod",
+      "b": "know"
+    },
+    {
+      "f": "blwyddyn / oed",
+      "b": "year"
+    },
+    {
+      "f": "dy / eich",
+      "b": "your"
+    },
+    {
+      "f": "da",
+      "b": "good"
+    },
+    {
+      "f": "dod",
+      "b": "come"
+    },
+    {
+      "f": "meddwl",
+      "b": "think"
+    },
+    {
+      "f": "dau / dwy",
+      "b": "two"
+    },
+    {
+      "f": "ni",
+      "b": "our"
+    },
+    {
+      "f": "gwaith / gweithio",
+      "b": "work"
+    },
+    {
+      "f": "iawn / wel",
+      "b": "well"
+    },
+    {
+      "f": "newydd",
+      "b": "new"
+    },
+    {
+      "f": "eisiau",
+      "b": "want"
+    },
+    {
+      "f": "dydd",
+      "b": "day"
+    },
+    {
+      "f": "ni",
+      "b": "us"
+    }
+  ]
+}
